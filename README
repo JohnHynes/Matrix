@@ -1,0 +1,47 @@
+------------
+Introduction
+------------
+Author : John Hynes
+
+This library is an attempt to apply what I've learned throughout my courses
+and create a C++ library of matrix operations as well as a matrix class as the
+underlying datastructure to be operated on.
+
+
+--------------------
+Matrix.hpp Functions
+--------------------
+
+Constructors
+------------
+matrix(const size_t N, const size_t M) - size constructor.
+matrix(const matrix<T>& other)         - copy constructor.
+matrix(matrix<T>&& other)              - move constructor.
+~matrix()                              - destructor.
+
+Operators
+---------
+matrix& operator= (const matrix& other)              - copy assignmeny operator.
+matrix& operator= (matrix&& other)                   - move assignment operator.
+T& operator() (size_t i, size_t j)                   - index operator.
+T& operator() (const size_t i, const size_t j) const - const index operator.
+
+Accessor Functions
+------------------
+sizt_t rows()                - returns the number of rows in the matrix.
+size_t columns()             - returns the number of columns in the matrix.
+cosnt size_t rows() const    - returns the number of rows in the matrix.
+const size_t columns() const - returns the number of columns in the matrix.
+
+Iterator Functions
+------------------
+T* begin()             - returns iterator to beginning of matrix.
+T* end()               - returns iterator to end of matrix.
+const T* begin() const - returns const iterator to beginning of matrix.
+const T* end() const   - returns const iterator to end of matrix.
+
+Public Member Functions
+-----------------------
+copy()      - returns copy of matrix.
+rowSwap()   - swaps two rows of the matrix.
+transpose() - returns the transpose of the matrix.
