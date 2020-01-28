@@ -11,6 +11,10 @@
  * code throughout the project.
 */
 
+// Macro guard
+#ifndef MATRIX_HPP
+#define MATRIX_HPP
+
 // System includes
 #include <algorithm>
 #include <utility>
@@ -293,3 +297,5 @@ private:
     }
   }
 };
+
+#endif
