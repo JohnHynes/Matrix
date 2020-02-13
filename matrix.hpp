@@ -23,6 +23,7 @@
 using std::copy_n;
 using std::exchange;
 using std::swap;
+using std::fill;
 
 // Matrix implementation
 template<typename T>
@@ -50,6 +51,13 @@ public:
   matrix (const size_t M, const size_t N)
     : m_matrix (new T[N * M]), m_rows (N), m_columns (M)
   {
+  }
+  
+  // Size and value constructor.
+  matrix (const size_t M, const size_t N, T val)
+    : m_matrix (new T[N * M]), m_rows (N), m_columns (M)
+  {
+    fill(this->begin(), this->end(), val);
   }
 
   // Copy constructor.
