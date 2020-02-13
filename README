@@ -9,7 +9,7 @@ underlying datastructure to be operated on.
 
 
 --------------------
-Matrix.hpp Functions
+matrix.hpp Functions
 --------------------
 
 Constructors
@@ -40,8 +40,17 @@ T* end()               - returns iterator to end of matrix.
 const T* begin() const - returns const iterator to beginning of matrix.
 const T* end() const   - returns const iterator to end of matrix.
 
-Public Member Functions
+Public member Functions
 -----------------------
 copy()      - returns copy of matrix.
-rowSwap()   - swaps two rows of the matrix.
-transpose() - returns the transpose of the matrix.
+
+------------------------------
+matrixoperations.hpp Functions
+------------------------------
+
+Public Member Functions
+-----------------------
+rowswap()          - swaps two rows of a matrix.
+columnswap()       - swaps two columns of a matrix.
+transpose()        - returns the transpose of a matrix.
+blockedtranspose() - returns the transpose of a matrix using blocking for cache optimization.
