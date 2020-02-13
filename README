@@ -15,6 +15,7 @@ matrix.hpp Functions
 Constructors
 ------------
 matrix(const size_t N, const size_t M) - size constructor.
+matrix(const size_t N, const size_t M, const T val) - size and value constructor.
 matrix(const matrix<T>& other)         - copy constructor.
 matrix(matrix<T>&& other)              - move constructor.
 ~matrix()                              - destructor.
@@ -54,3 +55,4 @@ rowswap()          - swaps two rows of a matrix.
 columnswap()       - swaps two columns of a matrix.
 transpose()        - returns the transpose of a matrix.
 blockedtranspose() - returns the transpose of a matrix using blocking for cache optimization.
+fillmatrix(matrinx<T> m, const T val) - Sets all elements of matrix m to val.
