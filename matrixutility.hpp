@@ -12,8 +12,8 @@
 */
 
 // Macro guard.
-#ifndef MATRIXOPERATIONS_HPP
-#define MATRIXOPERATIONS_HPP
+#ifndef MATRIXUTILITY_HPP
+#define MATRIXUTILITY_HPP
 
 // Include statements.
 
@@ -58,6 +58,7 @@ template<typename T>
 matrix<T>&
 transpose (matrix<T>& m)
 {
+  // Initializing transpose matrix.
   matrix<T> t (m.columns (), m.rows ());
 
   // Iterating over every element in the matrix.
@@ -69,6 +70,7 @@ transpose (matrix<T>& m)
       t (j, i) = m (i, j);
     }
   }
+  // Setting source matrix to be the transpose matrix.
   m = t;
   return m;
 }
@@ -94,7 +96,7 @@ blocktranspose (matrix<T>& m)
     for (size_t col_block = 0; col_block < m.columns ();
          col_block += block_size)
     {
-      // Calculating block bounds to save operations.
+      // Calculating block bounds.
       size_t row_block_end = row_block + block_size;
       size_t col_block_end = col_block + block_size;
 
@@ -126,5 +128,27 @@ fillmatrix (matrix<T>& m, const T val)
   return m;
 }
 
+// Resize function.
+// Resizes this matris to be of size NxM.
+template<typename T>
+matrix<T>
+resizematrix (const matrix<T> m, const size_t N, const size_t M)
+{
+  matrix<T> resized (N, M);
+
+  // Iterating through every element of m within the bounds
+  // of the new matrix.
+  size_t minN = std::min (m.rows (), N);
+  size_t minM = std::min (m.columns (), M);
+  for (size_t i = 0; i < m.rows () && i < N; ++i)
+  {
+    for (size_t j = 0; j < m.columns () && j < M; ++j)
+    {
+      resized (i, j) = m (i, j);
+    }
+  }
+
+  return resized;
+}
 
 #endif

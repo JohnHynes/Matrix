@@ -19,12 +19,6 @@
 #include <algorithm>
 #include <utility>
 
-// Using statements
-using std::copy_n;
-using std::exchange;
-using std::swap;
-using std::fill;
-
 // Matrix implementation
 template<typename T>
 struct matrix
@@ -48,16 +42,16 @@ public:
   /**************************************************************************/
 
   // Size constructor.
-  matrix (const size_t M, const size_t N)
+  matrix (const size_t N, const size_t M)
     : m_matrix (new T[N * M]), m_rows (N), m_columns (M)
   {
   }
-  
+
   // Size and value constructor.
-  matrix (const size_t M, const size_t N, const T val)
+  matrix (const size_t N, const size_t M, const T val)
     : m_matrix (new T[N * M]), m_rows (N), m_columns (M)
   {
-    fill(this->begin(), this->end(), val);
+    std::fill (begin (), end (), val);
   }
 
   // Copy constructor.
@@ -66,14 +60,14 @@ public:
     , m_rows (other.rows ())
     , m_columns (other.columns ())
   {
-    copy_n (other.m_matrix, rows () * columns (), m_matrix);
+    std::copy_n (other.m_matrix, rows () * columns (), m_matrix);
   }
 
   // Move constructor.
   matrix (matrix&& other)
-    : m_matrix (exchange (other.m_matrix, nullptr))
-    , m_rows (exchange (other.m_rows, 0))
-    , m_columns (exchange (other.m_columns, 0))
+    : m_matrix (std::exchange (other.m_matrix, nullptr))
+    , m_rows (std::exchange (other.m_rows, 0))
+    , m_columns (std::exchange (other.m_columns, 0))
   {
   }
 
@@ -84,9 +78,9 @@ public:
     if (&other != this)
     {
       matrix copy (other);
-      swap (copy.m_columns, m_columns);
-      swap (copy.m_rows, m_rows);
-      swap (copy.m_matrix, m_matrix);
+      std::swap (copy.m_columns, m_columns);
+      std::swap (copy.m_rows, m_rows);
+      std::swap (copy.m_matrix, m_matrix);
     }
     return *this;
   }
@@ -97,9 +91,9 @@ public:
   {
     if (this != other)
     {
-      swap (other.m_columns, m_columns);
-      swap (other.m_rows, m_rows);
-      swap (other.m_matrix, m_matrix);
+      std::swap (other.m_columns, m_columns);
+      std::swap (other.m_rows, m_rows);
+      std::swap (other.m_matrix, m_matrix);
     }
     return *this;
   }
@@ -209,6 +203,30 @@ public:
   {
     // Return a new matrix allocated using the copy constructor.
     return matrix<T> (*this);
+  }
+
+  // Resize function.
+  // Resizes this matris to be of size NxM.
+  matrix<T>&
+  resize (const size_t N, const size_t M)
+  {
+    T* resized = new T[N * M];
+
+    // Iterating through every element of m within the bounds
+    // of the new matrix.
+    size_t minN = std::min (m_rows, N);
+    size_t minM = std::min (m_columns, M);
+    
+    for (size_t i = 0; i < minN; ++i)
+    {
+      std::copy_n (m_matrix + i * m_columns, minM, resized + i * m_columns);
+    }
+    m_rows = N;
+    m_columns = M;
+
+    delete[] std::exchange (m_matrix, resized);
+
+    return *this;
   }
 };
 
