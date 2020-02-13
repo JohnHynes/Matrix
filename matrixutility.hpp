@@ -117,7 +117,7 @@ blocktranspose (matrix<T>& m)
 // Fills a matrix with a given value.
 template<typename T>
 matrix<T>&
-fillmatrix (matrix<T>& m, T val)
+fillmatrix (matrix<T>& m, const T val)
 {
   for (T& elem : m)
   {

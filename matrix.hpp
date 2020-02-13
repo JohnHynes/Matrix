@@ -54,7 +54,7 @@ public:
   }
   
   // Size and value constructor.
-  matrix (const size_t M, const size_t N, T val)
+  matrix (const size_t M, const size_t N, const T val)
     : m_matrix (new T[N * M]), m_rows (N), m_columns (M)
   {
     fill(this->begin(), this->end(), val);
