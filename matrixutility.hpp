@@ -129,7 +129,7 @@ fillmatrix (matrix<T>& m, const T val)
 }
 
 // Resize function.
-// Resizes this matris to be of size NxM.
+// Resizes this matrix to be of size NxM.
 template<typename T>
 matrix<T>
 resizematrix (const matrix<T> m, const size_t N, const size_t M)
